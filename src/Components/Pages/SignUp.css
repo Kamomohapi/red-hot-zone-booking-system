@@ -1,0 +1,182 @@
+/* src/pages/SignUp.css */
+
+/* --- Page Container and Centering --- */
+.signup-page-container {
+  min-height: 100vh; /* Full viewport height */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  padding: 2rem 1rem; /* Padding for small screens, adjusts for larger */
+  background: linear-gradient(to bottom right, #fef2f2, #fee2e2); /* Subtle gradient background */
+}
+
+/* --- Signup Card Styles --- */
+.signup-card {
+  background-color: white;
+  padding: 2.5rem; /* More generous padding inside the card */
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+  width: 100%; /* Take full width on small screens */
+  max-width: 448px; /* Max width for larger screens (equivalent to Tailwind's max-w-md) */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border: 1px solid #e5e7eb; /* Subtle border */
+}
+
+/* --- Header Styles --- */
+.signup-header {
+  text-align: center;
+  margin-bottom: 2rem; /* Space below header */
+}
+
+.signup-title {
+  font-size: 2.25rem; /* Larger font size */
+  font-weight: 800; /* Extra bold */
+  background: linear-gradient(to right, #dc2626, #ec4899); /* Gradient text */
+  -webkit-background-clip: text; /* Clip background to text shape */
+  -webkit-text-fill-color: transparent; /* Make text color transparent to show gradient */
+  color: transparent; /* Fallback for non-webkit browsers */
+  margin-bottom: 0.5rem;
+}
+
+.signup-subtitle {
+  color: #6b7280; /* Gray text */
+  font-size: 0.875rem; /* Small text */
+}
+
+/* --- Form Styles --- */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between form groups */
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column by default for mobile */
+  gap: 1rem; /* Space between columns */
+}
+
+/* Responsive grid for two columns */
+@media (min-width: 640px) { /* Equivalent to Tailwind's sm breakpoint */
+  .form-row {
+    grid-template-columns: 1fr 1fr; /* Two columns on larger screens */
+  }
+}
+
+.form-label {
+  display: block; /* Ensures label is on its own line */
+  font-size: 0.875rem; /* Small font size */
+  font-weight: 500;
+  color: #374151; /* Darker gray for labels */
+  margin-bottom: 0.25rem; /* Space below label */
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem; /* Generous padding for inputs */
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 0.5rem; /* Medium rounded corners */
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+  outline: none; /* Remove default outline */
+  box-sizing: border-box; /* Include padding and border in width */
+  color: #374151; /* Default input text color */
+}
+
+.form-input::placeholder {
+  color: #9ca3af; /* Placeholder color */
+}
+
+.form-input:focus {
+  border-color: #ef4444; /* Red border on focus */
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); /* Red ring on focus */
+}
+
+.input-error {
+  border-color: #ef4444; /* Red border for errors */
+}
+
+.error-message {
+  color: #ef4444; /* Red text for error messages */
+  font-size: 0.75rem; /* Smaller font for error messages */
+  margin-top: 0.25rem;
+}
+
+/* --- Button Styles --- */
+.submit-button {
+  width: 100%;
+  padding: 0.95rem 1.5rem; /* Generous padding */
+  border: none;
+  border-radius: 0.75rem; /* More rounded button */
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(to right, #ef4444, #ec4899); /* Gradient background */
+  transition: background 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+  font-size: 1.125rem; /* Larger font size */
+  margin-top: 1.5rem; /* Space above button */
+}
+
+.submit-button:hover {
+  background: linear-gradient(to right, #dc2626, #db2777); /* Darker gradient on hover */
+}
+
+.submit-button:disabled {
+  opacity: 0.5; /* Dim when disabled */
+  cursor: not-allowed;
+}
+
+/* --- Spinner Styles (for loading state) --- */
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Footer Styles --- */
+.signup-footer {
+  text-align: center;
+  margin-top: 1.5rem; /* Space above footer */
+}
+
+.signup-footer-text {
+  color: #6b7280; /* Gray text */
+  font-size: 0.875rem; /* Small font size */
+}
+
+.login-switch-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 600;
+  color: #dc2626; /* Red color */
+  cursor: pointer;
+  text-decoration: none; /* Remove underline */
+  transition: color 0.2s ease; /* Smooth color transition */
+  font-size: 0.875rem; /* Match parent text size */
+}
+
+.login-switch-button:hover {
+  color: #b91c1c; /* Darker red on hover */
+}
+
+.login-switch-button:focus {
+  outline: 2px solid #ef4444; /* Focus ring for accessibility */
+  outline-offset: 2px;
+  border-radius: 2px;
+}

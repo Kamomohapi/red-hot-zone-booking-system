@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 import bcrypt
-import jwt
+from jose import jwt
 import datetime
 from fastapi import HTTPException
 from config.settings import settings

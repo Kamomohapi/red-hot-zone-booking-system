@@ -25,7 +25,7 @@ const RequireSalon = ({ children }) => {
         console.log(res.data);
       })
       .catch(() => setHasSalon(false));
-  }, []);
+  }, [apiBaseUrl]);
 
   
   if (hasSalon === null) return <p>Loading...</p>;

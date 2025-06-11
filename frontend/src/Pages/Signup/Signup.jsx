@@ -152,7 +152,7 @@ try {
 
               <div className="form-group checkbox-group">
                 <input type="checkbox" name="agreeToTerms" checked={formData.agreeToTerms} onChange={handleInputChange} />
-                <label>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                {/* <label>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label> */}
               </div>
 
               <button type="submit" disabled={isLoading} className="submit-btn">

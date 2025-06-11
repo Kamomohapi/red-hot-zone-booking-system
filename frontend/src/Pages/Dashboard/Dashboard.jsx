@@ -40,7 +40,7 @@ const Dashboard = () => {
     };
 
     fetchSalonInfo();
-  }, []);
+  }, [apiBaseUrl]);
 
   
 
@@ -61,7 +61,7 @@ const Dashboard = () => {
       
     };
     fetchBookingInfo();
-  },[salonInfo]);
+  },[salonInfo,apiBaseUrl]);
 
   useEffect(() => {
   if (!salonInfo || !salonInfo.salon) return;
@@ -79,7 +79,7 @@ const Dashboard = () => {
   }
 
   fetchBookingTodayInfo();
- }, [salonInfo]);
+ }, [salonInfo,apiBaseUrl]);
  
   
 

@@ -19,7 +19,7 @@ const Signup = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const Signup = () => {
 setIsLoading(true);
 try {
   
-  const response = await axios.post("http://127.0.0.1:8000/api/api/register/user", {
+  const response = await axios.post(`${apiBaseUrl}/api/api/register/user`, {
     full_name: formData.fullName,
     email: formData.email,
     phone_number: formData.phone,

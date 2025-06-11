@@ -13,7 +13,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   //const { toast } = useToast();
-
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -24,7 +24,7 @@ const Login = () => {
 
   try {
     setIsLoading(true);
-    const response = await axios.post("http://127.0.0.1:8000/api/api/login/user", {
+    const response = await axios.post(`${apiBaseUrl}/api/api/login/user`, {
       email: formData.email,
       password: formData.password,
     });
@@ -45,6 +45,7 @@ const Login = () => {
   }
 };
 
+console.log("API Base URL:", apiBaseUrl);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

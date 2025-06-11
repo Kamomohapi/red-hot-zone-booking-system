@@ -15,8 +15,8 @@ load_dotenv()
 origins = [
     "http://localhost:3000",  # React app
     "http://127.0.0.1:3000",
-    "http://localhost:3001"  # React app
-    "https://your-production-domain.com",  # Production domain
+    "http://localhost:3001",  # React app
+    "https://red-hot-zone-booking-system.onrender.com",  # Production domain
 ]
 
 # cors configuration

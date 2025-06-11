@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect} from "react";
 import {
   BarChart3,
   Calendar,
@@ -20,12 +20,14 @@ const Dashboard = () => {
  const [error, setError] = useState(null);
  const[bookingInfo, setBookingInfo] = useState([]);
  const [bookingTodayInfo, setBookingTodayInfo] = useState([]);
+ const apiBaseUrl = process.env.REACT_APP_API_BASE_URL 
+
     useEffect(() => {
     const fetchSalonInfo = async () => {
       try {
         const token = sessionStorage.getItem("token");
         console.log("Token:", token); // 👈 Check token
-        const response = await axios.get("http://127.0.0.1:8000/api/salon/info/", {
+        const response = await axios.get(`${apiBaseUrl}/api/salon/info/`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -48,7 +50,7 @@ const Dashboard = () => {
 
     const fetchBookingInfo = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/api/salon/bookings/${salon_slug}/`);
+        const response = await axios.get(`${apiBaseUrl}/api/api/salon/bookings/${salon_slug}/`);
         setBookingInfo(response.data.bookings);
         
       }
@@ -67,7 +69,7 @@ const Dashboard = () => {
 
   const fetchBookingTodayInfo = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/apisalon/bookings/today/${salon_slug}/`);
+      const response = await axios.get(`${apiBaseUrl}/api/apisalon/bookings/today/${salon_slug}/`);
       setBookingTodayInfo(response.data.booking_count);
       }
     catch (error) {

@@ -4,6 +4,7 @@ import axios from "axios";
 
 const RequireSalon = ({ children }) => {
   const [hasSalon, setHasSalon] = useState(null);
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -12,7 +13,7 @@ const RequireSalon = ({ children }) => {
       return;
     }
 
-    axios.get("http://127.0.0.1:8000/api/salon/website/", {
+    axios.get(`${apiBaseUrl}/api/salon/website/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

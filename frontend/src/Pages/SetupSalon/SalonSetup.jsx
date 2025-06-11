@@ -26,6 +26,8 @@ const SalonSetup = () => {
   const [services, setServices] = useState([
     { name: "", duration: "", price: "" }])
 
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +67,7 @@ const SalonSetup = () => {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/create/salon",
+        `${apiBaseUrl}/api/create/salon`,
         {
           name: salonData.name,
           address: salonData.address,
@@ -80,7 +82,7 @@ const SalonSetup = () => {
           },
         }
       );
-      await axios.post("http://127.0.0.1:8000/api/api/create_service",{
+      await axios.post(`${apiBaseUrl}/api/api/create_service`,{
         headers: {
           Authorization: `Bearer ${token}`,
         },

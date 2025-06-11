@@ -17,6 +17,8 @@ const BookingPage = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL  
 
   const services = [
     "Hair Cut", "Hair Color", "Hair Cut & Color", "Highlights",
@@ -40,7 +42,7 @@ const BookingPage = () => {
   const bookingData = { ...formData };
 
   try {
-    await axios.post("http://127.0.0.1:8000/api/api/create/booking", bookingData);
+    await axios.post(`${apiBaseUrl}/api/api/create/booking`, bookingData);
     alert("Booking Submitted! We will contact you soon.");
     setFormData({
       client_name: "",

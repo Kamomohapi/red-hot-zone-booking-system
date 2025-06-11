@@ -6,7 +6,7 @@ const BrandingEditor = () => {
   const [coverImage, setCoverImage] = useState(null);
   const [themeColor, setThemeColor] = useState("#ff4757");
   const [welcomeMessage, setWelcomeMessage] = useState("");
-
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem("token");
@@ -17,7 +17,7 @@ const BrandingEditor = () => {
     formData.append("welcome_message", welcomeMessage);
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/salon/branding/", formData, {
+      await axios.post(`${apiBaseUrl}/api/salon/branding/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data"

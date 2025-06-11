@@ -1,0 +1,147 @@
+.signup-page {
+  min-height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.signup-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.signup-container {
+  position: relative;
+  z-index: 10;
+  padding: 40px;
+}
+
+.signup-content {
+  display: flex;
+  gap: 40px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.signup-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.signup-left h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #ffcc00;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.icon-check {
+  margin-right: 10px;
+  vertical-align: middle;
+  color: #ffcc00;
+}
+
+.trial-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin-top: 40px;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  border-radius: 10px;
+}
+
+.trial-title {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.signup-form-box {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  padding: 20px;
+  margin:auto;
+  border-radius: 20px;
+  color: black;
+}
+
+.signup-form-box h2 {
+  font-size: 2rem;
+  margin-bottom: 9px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: leftS;
+  border: 1px solid #ccc;
+}
+
+.password-group .toggle-password {
+  position: absolute;
+  top: 36px;
+  right: 11px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #f72020;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.signin-text {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-home {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}

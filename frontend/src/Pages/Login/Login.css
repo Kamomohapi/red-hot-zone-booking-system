@@ -1,0 +1,251 @@
+/* Login.css */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.title{
+    margin-top: 0.2rem;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); /* Optional: reduce darkness */
+  z-index: 1;
+}
+
+.login-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+
+.icon-box {
+  background-color: #e11d48;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.icon-white {
+  color: white;
+  width: 2rem;
+  height: 2rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+}
+
+.login-form {
+  display: relative;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  text-align: auto;
+}
+
+.form-group input {
+  width: 90%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: #e11d48;
+  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.3);
+}
+
+.password-wrapper {
+  position: relative; 
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.toggle-password:hover {
+  color: #e11d48;
+}
+
+.form-utility {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #e11d48;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition: transform 0.3s, opacity 0.3s;
+  cursor: pointer;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  background-color: #be123c;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 9999px;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid #d1d5db;
+}
+
+.divider::before {
+  margin-right: 0.75rem;
+}
+
+.divider::after {
+  margin-left: 0.75rem;
+}
+
+.google-btn {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  background: white;
+  transition: background 0.3s;
+}
+
+.google-btn:hover {
+  background: #f9fafb;
+}
+
+.footer-text {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.footer-text a {
+  color: #e11d48;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  color: #be123c;
+}
+
+.back-home {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.back-home a {
+  color: #facc15;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.back-home a:hover {
+  color: #eab308;
+}
+
+.icon-back {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

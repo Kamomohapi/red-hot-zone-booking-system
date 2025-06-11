@@ -1,0 +1,174 @@
+/* Outer wrapper for background */
+.booking-outer {
+  min-height: 100vh;
+  background: #f6f7fa;
+  padding: 40px 0;
+}
+
+/* Banner/Header */
+.booking-banner {
+  max-width: 800px;
+  margin: 0 auto 32px auto;
+  padding: 32px 24px;
+  background: linear-gradient(90deg, #b31217 0%, #e52d27 100%);
+  border-radius: 16px 16px 0 0;
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(179,18,23,0.08);
+}
+.booking-banner h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.booking-banner p {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* Main container */
+.booking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 0 24px 32px 24px;
+}
+
+/* Card-like sections */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  padding: 28px 24px 20px 24px;
+  margin-bottom: 24px;
+}
+
+/* Section headers */
+.section h2 {
+  font-size: 1.15rem;
+  color: #b31217;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Inputs layout */
+.input-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 1rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fafbfc;
+  margin-bottom: 12px;
+  transition: border-color 0.3s;
+}
+input:focus {
+  border-color: #e52d27;
+  outline: none;
+}
+
+/* Service and Time Buttons */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+.options-grid button {
+  padding: 0.7rem 0.8rem;
+  border: 1.5px solid #e2e2e2;
+  background: #f9f9fa;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.options-grid button:hover {
+  background: #f1f1f5;
+  border-color: #b31217;
+}
+.options-grid .selected {
+  background: #e52d27;
+  color: #fff;
+  border-color: #b31217;
+  font-weight: 600;
+}
+
+/* Time grid more compact */
+.time-grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 12px;
+}
+
+/* Date & Time row */
+.date-time-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  background: #e52d27;
+  color: #fff;
+  font-size: 1.12rem;
+  font-weight: 700;
+  padding: 1rem 0;
+  border: none;
+  border-radius: 10px;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(229,45,39,0.07);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.submit-btn:hover {
+  background: #b31217;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .booking-banner,
+  .booking-container {
+    padding: 16px 6px;
+  }
+  .card {
+    padding: 16px 8px;
+  }
+  .options-grid, .time-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .input-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+.spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  border-top: 3px solid #e52d27;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

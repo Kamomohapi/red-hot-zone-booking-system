@@ -1,0 +1,25 @@
+.branding-preview {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.branding-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.branding-cover {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.branding-details {
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+}

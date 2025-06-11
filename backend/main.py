@@ -6,10 +6,12 @@ from routes.user_routes import user_endpoints
 from routes.salon_routes import salon_endpoints
 from routes.booking_routes import booking_endpoints
 from routes.service_routes import service_endpoints
+from dotenv import load_dotenv
+import os
 
 app = FastAPI()
 
-
+load_dotenv()
 origins = [
     "http://localhost:3000",  # React app
     "http://127.0.0.1:3000",

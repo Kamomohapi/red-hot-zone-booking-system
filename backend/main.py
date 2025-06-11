@@ -16,7 +16,8 @@ origins = [
     "http://localhost:3000",  # React app
     "http://127.0.0.1:3000",
     "http://localhost:3001",  # React app
-    "https://red-hot-zone-booking-system.onrender.com",  # Production domain
+    "https://red-hot-zone-booking-system.onrender.com",  # Production domain for server
+    "https://red-hot-zone-booking-system-1.onrender.com" #Production domain for frontend
 ]
 
 # cors configuration

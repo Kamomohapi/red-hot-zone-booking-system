@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./BookingPage.css";
@@ -14,7 +14,7 @@ const BookingPage = () => {
     service_type: "",
     salon_slug: slug || "", // Add salon_slug here
   });
-  const [selectedDate, setSelectedDate] = useState("");
+  const [ setSelectedDate] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   

@@ -105,7 +105,7 @@ console.log("API Base URL:", apiBaseUrl);
                 <input type="checkbox" />
                 Remember me
               </label>
-              <a href="#">Forgot password?</a>
+             
             </div>
 
             <button

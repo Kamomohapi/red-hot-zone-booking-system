@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Homepage from './Pages/Homepage/Homepage';
 import Signup from './Pages/Signup/Signup';
@@ -13,7 +13,7 @@ import BookingPage from './Pages/Booking/BookingPage';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
        <ToastContainer />
         <Routes>
           <Route path="/" element={ <Homepage/>} />
@@ -25,7 +25,7 @@ function App() {
           <Route path="/book/:slug" element={<BookingPage />} />
           {/* Add more routes as needed */}
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

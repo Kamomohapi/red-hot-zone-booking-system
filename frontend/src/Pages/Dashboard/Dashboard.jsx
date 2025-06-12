@@ -8,7 +8,6 @@ import {
   Copy,
   Scissors,
   Plus,
-  Eye,
   Edit
 } from "lucide-react";
 import "./Dashboard.css";

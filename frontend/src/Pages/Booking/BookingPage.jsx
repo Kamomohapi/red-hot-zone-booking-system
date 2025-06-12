@@ -14,7 +14,7 @@ const BookingPage = () => {
     service_type: "",
     salon_slug: slug || "", // Add salon_slug here
   });
-  const [ setSelectedDate] = useState("");
+  const [ selectedDate, setSelectedDate] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -124,7 +124,7 @@ const BookingPage = () => {
           <input
             type="date"
             name="date"
-            value={formData.date}
+            value={selectedDate || formData.date}
             onChange={handleChange}
             required
           />

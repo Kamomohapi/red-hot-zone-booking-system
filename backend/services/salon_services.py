@@ -4,8 +4,11 @@ from bson import ObjectId
 from slugify import slugify
 from serializer.serializer import serialize_mongo_document  
 from fastapi import HTTPException, Security
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-BASE_BOOKING_URL = "http://localhost:3000/book/"
+BASE_BOOKING_URL = os.getenv("CLIENT_URL")
 
 def create_salon(user_id: str, salon_data: Salon) -> dict:
     def create_unique_slug(name: str, existing_slugs: set) -> str:

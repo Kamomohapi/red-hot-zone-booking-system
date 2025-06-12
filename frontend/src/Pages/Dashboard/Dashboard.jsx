@@ -8,7 +8,6 @@ import {
   Copy,
   Scissors,
   Plus,
-  Eye,
   Edit
 } from "lucide-react";
 import "./Dashboard.css";
@@ -145,7 +144,7 @@ const Dashboard = () => {
           <div className="link-controls">
             <code>{salonInfo.salon.website}</code>
             <button onClick={copyPublicLink}><Copy /> Copy</button>
-            <button><Eye /> Preview</button>
+            {/* <button><Eye /> Preview</button> */}
           </div>
         </div>
         <LinkIcon className="link-icon" />

@@ -7,14 +7,13 @@ import {
   Link as LinkIcon,
   Copy,
   Scissors,
-  Plus,
   Edit,
   LogOut
 } from "lucide-react";
 import "./Dashboard.css";
 import axios from "axios";
 import ManageServicesModal from "./ManageServicesModal"; // Import your modal component
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate }from "react-router-dom";
 
 const Dashboard = () => {
   const [salonInfo, setSalonInfo] = useState(null);
@@ -154,12 +153,7 @@ const handleSaveService = async (updatedService) => {
     sessionStorage.removeItem("token")
     navigate("/")
   }
-
-  const handleInputChange = () =>{
-
-  }
-
-  // Copy public booking link to clipboard
+  
   const copyPublicLink = () => {
     if (salonInfo?.salon?.website) {
       navigator.clipboard.writeText(salonInfo.salon.website);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart3,
   Calendar,
@@ -8,28 +8,37 @@ import {
   Copy,
   Scissors,
   Plus,
-  Edit
+  Edit,
+  LogOut
 } from "lucide-react";
 import "./Dashboard.css";
 import axios from "axios";
+import ManageServicesModal from "./ManageServicesModal"; // Import your modal component
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const [salonInfo, setSalonInfo] = useState(null);
+  const [error, setError] = useState(null);
+  const [bookingInfo, setBookingInfo] = useState([]);
+  const [bookingTodayInfo, setBookingTodayInfo] = useState(null);
 
- const [salonInfo, setSalonInfo] = useState(null);
- const [error, setError] = useState(null);
- const[bookingInfo, setBookingInfo] = useState([]);
- const [bookingTodayInfo, setBookingTodayInfo] = useState([]);
- const apiBaseUrl = process.env.REACT_APP_API_BASE_URL 
+  // Services modal states
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(false);
+  const [showServicesModal, setShowServicesModal] = useState(false);
+  const navigate = useNavigate();
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
-    useEffect(() => {
+  // Fetch salon info
+  useEffect(() => {
     const fetchSalonInfo = async () => {
       try {
         const token = sessionStorage.getItem("token");
-        console.log("Token:", token); // 👈 Check token
+        if (!token) throw new Error("No auth token found");
         const response = await axios.get(`${apiBaseUrl}/api/salon/info/`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         setSalonInfo(response.data);
       } catch (error) {
@@ -41,80 +50,142 @@ const Dashboard = () => {
     fetchSalonInfo();
   }, [apiBaseUrl]);
 
-  
-
-    useEffect(() => {
-    if(!salonInfo) return;
+  // Fetch booking info when salonInfo is available
+  useEffect(() => {
+    if (!salonInfo) return;
     const salon_slug = salonInfo.salon.slug;
 
     const fetchBookingInfo = async () => {
       try {
-        const response = await axios.get(`${apiBaseUrl}/api/api/salon/bookings/${salon_slug}/`);
+        const response = await axios.get(
+          `${apiBaseUrl}/api/api/salon/bookings/${salon_slug}/`
+        );
         setBookingInfo(response.data.bookings);
-        
-      }
-      catch (error) {
+      } catch (error) {
         console.error("Failed to fetch booking info:", error);
         setError("Could not load booking information.");
       }
-      
     };
+
     fetchBookingInfo();
-  },[salonInfo,apiBaseUrl]);
+  }, [salonInfo, apiBaseUrl]);
 
+  // Fetch today's booking count
   useEffect(() => {
-  if (!salonInfo || !salonInfo.salon) return;
-  const salon_slug = salonInfo.salon.slug;
+    if (!salonInfo) return;
+    const salon_slug = salonInfo.salon.slug;
 
-  const fetchBookingTodayInfo = async () => {
-    try {
-      const response = await axios.get(`${apiBaseUrl}/api/apisalon/bookings/today/${salon_slug}/`);
-      setBookingTodayInfo(response.data.booking_count);
+    const fetchBookingTodayInfo = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/api/api/salon/bookings/${salon_slug}/`
+        );
+        setBookingTodayInfo(response.data.booking_count);
+      } catch (error) {
+        console.error("Failed to fetch today's bookings:", error);
+        setError("Could not load today's bookings.");
       }
-    catch (error) {
-      console.error("Failed to fetch today's bookings:", error);
-      setError("Could not load today's bookings.");
+    };
+
+    fetchBookingTodayInfo();
+  }, [salonInfo, apiBaseUrl]);
+
+  // Fetch services for Manage Services modal
+  const fetchServices = async () => {
+    if (!salonInfo) return;
+    setServicesLoading(true);
+    try {
+      const token = sessionStorage.getItem("token");
+      const response = await axios.get(
+        `${apiBaseUrl}/api/get_services`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setServices(response.data.services);
+      console.log(response.data)
+    } catch (err) {
+      console.error("Failed to fetch services:", err);
+      setError("Could not load services.");
     }
+    setServicesLoading(false);
+  };
+
+  // Save updated service (local update + TODO: backend integration)
+const handleSaveService = async (updatedService) => {
+  const token = sessionStorage.getItem("token");
+
+  if (!updatedService.id) {
+    console.error("Missing service ID. Cannot update.");
+    return;
   }
 
-  fetchBookingTodayInfo();
- }, [salonInfo,apiBaseUrl]);
- 
-  
+  // Update local state
+  setServices((prev) =>
+    prev.map((s) => (s.id === updatedService.id ? updatedService : s))
+  );
 
-    if (error) {
-    return <div className="dashboard-error">Error: {error}</div>;
+  try {
+    await axios.patch(
+      `${apiBaseUrl}/api/modify/services/${updatedService.id}`,
+      updatedService,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Service updated successfully");
+  } catch (error) {
+    console.error("Failed to update service:", error);
+  }
+};
+
+
+  // Toggle service active status (local update + TODO: backend integration)
+  const handleToggleActive = (service) => {
+    const updatedService = { ...service, active: !service.active };
+    setServices((prev) =>
+      prev.map((s) => (s.id === service.id ? updatedService : s))
+    );
+    // TODO: Add API call to persist active status change
+  };
+
+  const handleLogout = () =>{
+    sessionStorage.removeItem("token")
+    navigate("/")
   }
 
-    if (!salonInfo) {
-    return <div className="dashboard-info-loader">Loading salon information...</div>;
-  }
-  console.log("Salon Info:", salonInfo);
+  const handleInputChange = () =>{
 
+  }
+
+  // Copy public booking link to clipboard
   const copyPublicLink = () => {
-    if (salonInfo.salon.website) {
+    if (salonInfo?.salon?.website) {
       navigator.clipboard.writeText(salonInfo.salon.website);
       alert("Public booking link copied!");
     }
-  };  
+  };
 
- 
-  console.log("Booking Info:", bookingInfo);
-  console.log("Today's Booking Info:", bookingTodayInfo);
+  if (error) {
+    return <div className="dashboard-error">Error: {error}</div>;
+  }
+
+  if (!salonInfo) {
+    return <div className="dashboard-info-loader">Loading salon information...</div>;
+  }
 
   const stats = [
-    { label: "Today's Bookings", value: bookingTodayInfo.booking_count || "No bookings for today", icon: <Calendar />, color: "salon-red" },
+    {
+      label: "Today's Bookings",
+      value: bookingTodayInfo ?? "No bookings for today",
+      icon: <Calendar />,
+      color: "salon-red",
+    },
     { label: "This Week", value: "89", icon: <BarChart3 />, color: "salon-yellow" },
     { label: "Total Clients", value: "456", icon: <Users />, color: "green" },
-    { label: "Revenue (Month)", value: "$8,420", icon: <BarChart3 />, color: "blue" }
+    { label: "Revenue (Month)", value: "$8,420", icon: <BarChart3 />, color: "blue" },
   ];
-
-  /*const recentBookings = [
-    { id: 1, client: "Sarah Johnson", service: "Hair Cut & Color", time: "10:00 AM", status: "confirmed" },
-    { id: 2, client: "Mike Chen", service: "Beard Trim", time: "11:30 AM", status: "pending" },
-    { id: 3, client: "Emma Wilson", service: "Manicure", time: "2:00 PM", status: "confirmed" },
-    { id: 4, client: "David Brown", service: "Full Service", time: "3:30 PM", status: "confirmed" }
-  ];*/
 
   return (
     <div className="dashboard">
@@ -128,8 +199,8 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="header-right">
-          <button className="btn-new-booking">
-            <Plus /> Add Service
+          <button className="btn-new-booking" onClick={handleLogout}>
+            <LogOut /> LogOut
           </button>
           <button className="btn-settings">
             <Settings />
@@ -143,8 +214,9 @@ const Dashboard = () => {
           <p>Share this link with your clients for easy online booking</p>
           <div className="link-controls">
             <code>{salonInfo.salon.website}</code>
-            <button onClick={copyPublicLink}><Copy /> Copy</button>
-            {/* <button><Eye /> Preview</button> */}
+            <button onClick={copyPublicLink}>
+              <Copy /> Copy
+            </button>
           </div>
         </div>
         <LinkIcon className="link-icon" />
@@ -168,22 +240,22 @@ const Dashboard = () => {
             <h3>Recent Appointments</h3>
             <button>View All</button>
           </div>
-         {bookingInfo.map((booking, index) => (
-             <div key={index} className="booking-card">
-            <div className="booking-info">
-      <Users />
-      <div>
-        <p>{booking.client_name}</p>
-        <span>{booking.service_type}</span>
-      </div>
-    </div>
-    <div className="booking-meta">
-      <p>Time: {booking.time_slot}</p>
-      <p>Date: {booking.date}</p>
-      <span className="status confirmed">Confirmed</span> {/* You can adjust status logic here */}
-    </div>
-  </div>
-))}
+          {bookingInfo.map((booking, index) => (
+            <div key={index} className="booking-card">
+              <div className="booking-info">
+                <Users />
+                <div>
+                  <p>{booking.client_name}</p>
+                  <span>{booking.service_type}</span>
+                </div>
+              </div>
+              <div className="booking-meta">
+                <p>Time: {booking.time_slot}</p>
+                <p>Date: {booking.date}</p>
+                <span className="status confirmed">Confirmed</span>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="sidebar">
@@ -192,21 +264,53 @@ const Dashboard = () => {
               <h3>Salon Information</h3>
               <Edit />
             </div>
-            <p><strong>Name:</strong> {salonInfo.salon.name}</p>
-            <p><strong>Address:</strong> {salonInfo.salon.address}</p>
-            <p><strong>Phone:</strong> {salonInfo.salon.phone_number}</p>
-            <p><strong>Email:</strong> {salonInfo.salon.email}</p>
+            <p>
+              <strong>Salon Name:</strong> {salonInfo.salon.name}
+            </p>
+            <p>
+              <strong>Address:</strong> {salonInfo.salon.address}
+            </p>
+            <p>
+              <strong>Phone:</strong> {salonInfo.salon.phone_number}
+            </p>
+            <p>
+              <strong>Email:</strong> {salonInfo.salon.email}
+            </p>
           </div>
 
           <div className="quick-actions">
             <h3>Quick Actions</h3>
-            <button><Calendar /> Manage Services</button>
-            <button><Users /> Client Database</button>
-            <button><Settings /> Customize Page</button>
-            <button><BarChart3 /> Analytics</button>
+            <button
+              onClick={() => {
+                setShowServicesModal(true);
+                fetchServices();
+              }}
+            >
+              <Calendar /> Manage Services
+            </button>
+            <button>
+              <Users /> Client Database
+            </button>
+            <button>
+              <Settings /> Customize Page
+            </button>
+            <button>
+              <BarChart3 /> Analytics
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Render Manage Services Modal */}
+      {showServicesModal && (
+        <ManageServicesModal
+          services={services}
+          servicesLoading={servicesLoading}
+          onClose={() => setShowServicesModal(false)}
+          onSaveService={handleSaveService}
+          onToggleActive={handleToggleActive}
+        />
+      )}
     </div>
   );
 };

@@ -56,14 +56,14 @@ const SalonSetup = () => {
       })
     );
 
-    console.log("Payload being sent:", {
-      name: salonData.name,
-      address: salonData.address,
-      phone_number: salonData.phoneNumber,
-      email: salonData.email,
-      user_id: userId,
-      operating_hours: formattedOperatingHours,
-    });
+    // ("Payload being sent:", {
+    //   name: salonData.name,
+    //   address: salonData.address,
+    //   phone_number: salonData.phoneNumber,
+    //   email: salonData.email,
+    //   user_id: userId,
+    //   operating_hours: formattedOperatingHours,
+    // });
 
     try {
       await axios.post(

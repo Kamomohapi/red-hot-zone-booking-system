@@ -22,7 +22,7 @@ const RequireSalon = ({ children }) => {
         // Adjust this line based on your actual API response structure
         const website = res.data?.website || res.data;
         setHasSalon(typeof website === "string" && website.startsWith("http"));
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch(() => setHasSalon(false));
   }, [apiBaseUrl]);

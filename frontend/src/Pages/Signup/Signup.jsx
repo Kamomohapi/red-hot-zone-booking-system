@@ -150,10 +150,12 @@ try {
                 </div>
               </div>
 
-              <div className="form-group checkbox-group">
-                <input type="checkbox" name="agreeToTerms" checked={formData.agreeToTerms} onChange={handleInputChange} />
-                {/* <label>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label> */}
-              </div>
+             <div className="form-group checkbox-group">
+  <input type="checkbox" name="agreeToTerms" checked={formData.agreeToTerms} onChange={handleInputChange} />
+  <label>
+    I agree to the <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>
+  </label>
+</div>
 
               <button type="submit" disabled={isLoading} className="submit-btn">
                 {isLoading ? "Creating Account..." : "Create My Salon Account"}

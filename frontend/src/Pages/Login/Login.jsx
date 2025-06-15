@@ -45,7 +45,7 @@ const Login = () => {
   }
 };
 
-console.log("API Base URL:", apiBaseUrl);
+// console.log("API Base URL:", apiBaseUrl);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -78,7 +78,7 @@ console.log("API Base URL:", apiBaseUrl);
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-group-password">
               <label htmlFor="password">Password</label>
               <div className="password-wrapper">
                 <input

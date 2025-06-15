@@ -13,21 +13,21 @@ def create_booking_route(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@booking_endpoints.get("/salon/bookings/{salon_slug}")
+@booking_endpoints.get("/salon/bookings/{salon_slug}/")
 def get_bookings_by_salon_slug_route(salon_slug: str):
     try:
         return get_bookings_by_salon_slug(salon_slug=salon_slug)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@booking_endpoints.get("salon/bookings/today/{salon_slug}")
+@booking_endpoints.get("/salon/bookings/today/{salon_slug}/")
 def get_todays_bookings(salon_slug: str):
     try:
         return get_todays_booking_count(salon_slug=salon_slug)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@booking_endpoints.get("/salon/bookings/total/{salon_slug}")
+@booking_endpoints.get("/salon/bookings/total/{salon_slug}/")
 def get_total_bookings(salon_slug: str):
     try:
         bookings = get_bookings_count(salon_slug=salon_slug)

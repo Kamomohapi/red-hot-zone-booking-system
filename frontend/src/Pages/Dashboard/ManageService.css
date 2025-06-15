@@ -1,0 +1,184 @@
+/* Add these styles to your Dashboard.css or create a new ManageServicesModal.css file */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  width: 90%;
+  max-width: 550px;
+  padding: 24px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: background-color 0.2s;
+}
+
+.service-item:hover {
+  background-color: #f0f0f0;
+}
+
+.service-details {
+  flex: 1;
+}
+
+.service-name {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.service-price {
+  color: #555;
+}
+
+.service-status {
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.status-active {
+  background-color: #e6f7ee;
+  color: #0d8a53;
+}
+
+.status-inactive {
+  background-color: #feeae9;
+  color: #d73a49;
+}
+
+.service-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-edit:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-activate {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-activate:hover {
+  background-color: #3d9140;
+}
+
+.btn-deactivate {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-deactivate:hover {
+  background-color: #d32f2f;
+}
+
+.btn-close {
+  background-color: #f0f0f0;
+  color: #333;
+  margin-top: 20px;
+}
+
+.btn-close:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-form {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  color: #666;
+}

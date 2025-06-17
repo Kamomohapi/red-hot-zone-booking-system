@@ -153,12 +153,15 @@ const handleSaveService = async (updatedService) => {
     sessionStorage.removeItem("token")
     navigate("/")
   }
-  
+
   const copyPublicLink = () => {
-    if (salonInfo?.salon?.website) {
-      navigator.clipboard.writeText(salonInfo.salon.website);
-      alert("Public booking link copied!");
-    }
+   const salon_slug = salonInfo.salon.slug;
+  
+   if(slug){
+    const publicLink = `${window.location.origin}/book/${salon_slug}`;
+    navigator.clipboard.writeText(publicLink);
+    alert("Public booking link copied!");
+   }
   };
 
   if (error) {

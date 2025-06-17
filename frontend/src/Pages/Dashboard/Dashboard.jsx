@@ -157,7 +157,7 @@ const handleSaveService = async (updatedService) => {
   const copyPublicLink = () => {
    const salon_slug = salonInfo.salon.slug;
   
-   if(slug){
+   if(salon_slug){
     const publicLink = `${window.location.origin}/book/${salon_slug}`;
     navigator.clipboard.writeText(publicLink);
     alert("Public booking link copied!");

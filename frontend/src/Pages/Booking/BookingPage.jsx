@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import  { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./BookingPage.css";
@@ -17,13 +17,40 @@ const BookingPage = () => {
   const [ selectedDate, setSelectedDate] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [services,setServices] = useState([])
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL  
 
-  const services = [
+  /*const services = [
     "Hair Cut", "Hair Color", "Hair Cut & Color", "Highlights",
     "Beard Trim", "Manicure", "Pedicure", "Facial", "Full Service Package"
-  ];
+  ];*/
+
+  useEffect(() => {
+  const fetchSalonServices = async () => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/get/booking/services/${slug}`);
+      console.log("Response:", response);
+
+      if (response.data.status?.toLowerCase() === "ok") {
+        const servicesList = response.data.services;
+        if (Array.isArray(servicesList)) {
+          setServices(servicesList);
+        } else {
+          console.error("No services array found in response.");
+        }
+      } else {
+        console.error("Error:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Failed to fetch salon services:", error?.message || error);
+    }
+  };
+
+  if (slug) {
+    fetchSalonServices();
+  }
+}, [slug, apiBaseUrl]);
+
 
   const timeSlots = [
     "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
@@ -102,21 +129,30 @@ const BookingPage = () => {
         />
       </section>
 
-      <section className="section card">
-        <h2>Service Selection</h2>
-        <div className="options-grid">
-          {services.map((service) => (
-            <button
-              type="button"
-              key={service}
-              className={formData.service_type === service ? "selected" : ""}
-              onClick={() => setFormData((prev) => ({ ...prev, service_type: service }))}
-            >
-              {service}
-            </button>
-          ))}
-        </div>
-      </section>
+      <section className="section card"> 
+  <h2>Service Selection</h2>
+  <div className="options-grid">
+    {services.length === 0 ? (
+      <div className="no-services-message">
+        No services added yet. Please check again later.
+      </div>
+    ) : (
+      services.map((service) => (
+        <button
+          type="button"
+          key={service.id}
+          className={formData.service_type === service.name ? "selected" : ""}
+          onClick={() =>
+            setFormData((prev) => ({ ...prev, service_type: service.name }))
+          }
+        >
+          {service.name} R {service.price}
+        </button>
+      ))
+    )}
+  </div>
+</section>
+
 
       <section className="section card">
         <h2>Date & Time</h2>
@@ -124,6 +160,7 @@ const BookingPage = () => {
           <input
             type="date"
             name="date"
+            min={new Date().toISOString().split("T")[0]}
             value={selectedDate || formData.date}
             onChange={handleChange}
             required

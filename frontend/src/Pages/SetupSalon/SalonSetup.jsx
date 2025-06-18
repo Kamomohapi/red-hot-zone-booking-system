@@ -82,18 +82,20 @@ const SalonSetup = () => {
           },
         }
       );
-      await axios.post(`${apiBaseUrl}/api/api/create_service`,{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-          services: services.map((service) => ({
-            name: service.name,
-            duration: service.duration,
-            price: service.price,
-          })),
-        },
-      });
+      await axios.post(
+  `${apiBaseUrl}/api/create_service`,
+  {
+    name: services.name,
+    duration: services.duration,
+    price: services.price,
+    is_active: true
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
       navigate("/dashboard");
     } catch (error) {
       console.error("Failed to create salon:", error.response?.data || error.message);

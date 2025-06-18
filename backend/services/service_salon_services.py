@@ -48,7 +48,9 @@ def get_services(user_id: str) -> dict:
         query_user_id = ObjectId(user_id)
     except Exception:
         return {"status": "error", "message": "Invalid user_id format"}
-    service_by_user = list(serviceCollection.find({"user_id": query_user_id}))
+    service_by_user = list(serviceCollection.find({"user_id": query_user_id,
+                                                   "is_active":True
+                                                   }))
 
     if not service_by_user:
         return {"status": "error", "message": "No services found for this user"}
@@ -96,3 +98,38 @@ async def update_services(service_id:str, user_id:str, service:Service) -> bool:
    return result.modified_count > 0
 
 
+def get_booking_services(slug:str) ->dict:
+
+    salon = salonCollection.find_one({"slug":slug})
+
+    if not salon:
+        return{"status":"error","message":"Salon not found"}
+    
+    salon_id = salon["_id"]
+
+    services = list(serviceCollection.find({
+        "salon_id":salon_id,
+        "is_active":True
+    }))
+
+    if not services: 
+        return{"status":"error","message":"No services found for this salon"}
+    
+    serialized_services = [
+        {
+            "id": str(service["_id"]),
+            "name": service["name"],
+            "description": service["description"],
+            "price": service["price"],
+            "duration": service["duration"],
+            "category": service["category"],
+            "is_active": service["is_active"],
+            "user_id": str(service["user_id"]),
+            "salon_id": str(service["salon_id"]),
+        }
+        for service in services
+    ]
+    return{
+        "status": "Ok",
+        "services":serialized_services
+    }

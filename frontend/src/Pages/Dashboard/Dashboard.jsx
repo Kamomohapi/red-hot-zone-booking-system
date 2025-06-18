@@ -142,11 +142,11 @@ const handleSaveService = async (updatedService) => {
 
   // Toggle service active status (local update + TODO: backend integration)
   const handleToggleActive = (service) => {
-    const updatedService = { ...service, active: !service.active };
+    const updatedService = { ...service, is_active: !service.is_active };
     setServices((prev) =>
       prev.map((s) => (s.id === service.id ? updatedService : s))
     );
-    // TODO: Add API call to persist active status change
+    handleSaveService(updatedService)
   };
 
   const handleLogout = () =>{

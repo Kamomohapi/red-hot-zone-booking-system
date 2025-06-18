@@ -6,24 +6,14 @@ from routes.user_routes import user_endpoints
 from routes.salon_routes import salon_endpoints
 from routes.booking_routes import booking_endpoints
 from routes.service_routes import service_endpoints
-from dotenv import load_dotenv
-import os
-
+from config.settings import settings
 app = FastAPI()
 
-load_dotenv()
-origins = [
-    "http://localhost:3000",  # React app
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",  # React app
-    "https://red-hot-zone-booking-system.onrender.com",  # Production domain for server
-    "https://red-hot-zone-booking-system-1.onrender.com" #Production domain for frontend
-]
 
 # cors configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins= settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException,Security
-from services.service_salon_services import create_service_logic,get_services,update_services
+from services.service_salon_services import create_service_logic,get_services,update_services,get_booking_services
 from auth.auth_middleware import get_current_user
 from models.services_model import Service
 
@@ -37,3 +37,7 @@ async def update_services_details(service_id:str,
         raise HTTPException(status_code=500, detail="Failed to update salon branding")
     
     return {"status": "ok", "message": "Salon service details updated successfully"}
+
+@service_endpoints.get("/get/booking/services/{slug}")
+def get_services_by_salon_slug(slug:str):
+    return get_booking_services(slug)

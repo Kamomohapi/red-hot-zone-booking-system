@@ -14,7 +14,7 @@ import "./Dashboard.css";
 import axios from "axios";
 import ManageServicesModal from "./ManageServicesModal"; // Import your modal component
 import { useNavigate }from "react-router-dom";
-
+import CalendarView  from "./CalendarView";
 const Dashboard = () => {
   const [salonInfo, setSalonInfo] = useState(null);
   const [error, setError] = useState(null);
@@ -233,26 +233,11 @@ const handleSaveService = async (updatedService) => {
 
       <div className="main-grid">
         <div className="appointments">
-          <div className="section-header">
-            <h3>Recent Appointments</h3>
-            <button>View All</button>
-          </div>
-          {bookingInfo.map((booking, index) => (
-            <div key={index} className="booking-card">
-              <div className="booking-info">
-                <Users />
-                <div>
-                  <p>{booking.client_name}</p>
-                  <span>{booking.service_type}</span>
-                </div>
-              </div>
-              <div className="booking-meta">
-                <p>Time: {booking.time_slot}</p>
-                <p>Date: {booking.date}</p>
-                <span className="status confirmed">Confirmed</span>
-              </div>
-            </div>
-          ))}
+           {/* <div className="section-header">
+            <h3>Appointments Calendar</h3>
+              <button>View All</button>
+            </div> */}
+             <CalendarView bookings={bookingInfo} />
         </div>
 
         <div className="sidebar">
